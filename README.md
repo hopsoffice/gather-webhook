@@ -21,7 +21,7 @@ $ ./scripts/install.sh
 대부분의 경우엔 코드를 고치고 업데이트만 하면됨
 
 ```
-$ zappa deploy dev
+$ zappa update dev
 ```
 
 
