@@ -1,0 +1,33 @@
+<html>
+    <body>
+        <form method="POST" action="{{ url_for('.some') }}">
+
+            <fieldset>
+                <label>
+                    <input type="radio" value="Ed" name="name" />
+                    Ed
+                </label>
+
+                <label>
+                    <input type="radio" value="Bright" name="name" />
+                    Bright
+                </label>
+
+                <label>
+                    <input type="radio" value="Dante" name="name" />
+                    Dante
+                </label>
+            </fieldset>
+
+
+            <fieldset>
+                <input type="text" name="act" placeholder="~하고" />
+                <input type="number" name="time"/>분
+            </fieldset>
+
+            <button type="submit">
+                go
+            </button>
+        </form>
+    </body>
+</html>
