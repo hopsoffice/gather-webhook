@@ -1,3 +1,4 @@
+import pathlib
 import sys
 import json
 
@@ -5,35 +6,22 @@ import json
 template = {
     'dev': {
         'app_function': 'web.app',
-        'profile_name': 'hopsdev',
-        'project_name': 'landing-webhook',
+        'profile_name': 'gather_webhook',
+        'project_name': 'gather-webhook',
         'cors': True,
         'runtime': 'python3.8',
-        's3_bucket': 'zappa-landing-webhook',
+        's3_bucket': 'zappa-gather-webhook',
         'environment_variables': {
-            'slack_hook': '',
-            'google_client_id': '',
-            'google_client_secret': '',
-            'google_project_id': '',
-            'deploy_url': '',
-            'spreadsheet_id': ''
+            'slack_hook': ''
         }
     }
 }
-payload = json.loads(sys.stdin.read())
 
-m = [
-    'slack_hook',
-    'google_client_id',
-    'google_client_secret',
-    'google_project_id',
-    'deploy_url',
-    'spreadsheet_id',
-]
+with pathlib.Path('./resource.json').open('r') as f:
+    config = json.loads(f.read())
 
 
-for k in m:
-    template['dev']['environment_variables'][k] = payload[f'landing-webhook-{k}']
+settings = template.copy()
+settings['dev']['environment_variables']['slack_hook'] = config['slack_hook']
 
-
-print(json.dumps(template, indent=2))
+print(json.dumps(settings, indent=2))

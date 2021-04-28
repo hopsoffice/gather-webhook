@@ -1,8 +1,5 @@
-boto3==1.17.33
-Flask==1.1.2
 Flask-Cors==3.0.10
-google-api-python-client==2.0.2
-google-auth-httplib2==0.1.0
-google-auth-oauthlib==0.4.3
-googleapis-common-protos==1.53.0
+Flask==1.1.2
+boto3==1.17.33
 requests==2.25.1
+zappa==0.52.0

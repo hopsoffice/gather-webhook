@@ -1,23 +1,15 @@
 <html>
     <body>
-        <form method="POST" action="{{ url_for('.some') }}">
-            <input type="hidden" name='act' value="밥먹고" />
+        <form method="POST" action="{{ url_for('.make_action') }}">
+            <input type="hidden" name='act' value="{{ prefix }}" />
 
             <fieldset>
-                <label>
-                    <input type="radio" value="Ed" name="name" />
-                    Ed
-                </label>
-
-                <label>
-                    <input type="radio" value="Bright" name="name" />
-                    Bright
-                </label>
-
-                <label>
-                    <input type="radio" value="Dante" name="name" />
-                    Dante
-                </label>
+                {% for team in team_mates %}
+                    <label>
+                        <input type="radio" value="{{ team }}" name="name" />
+                        {{ team }}
+                    </label>
+                {% endfor %}
             </fieldset>
 
             <fieldset>
@@ -38,7 +30,7 @@
             </fieldset>
 
             <button type="submit">
-                go
+                전송
             </button>
         </form>
     </body>
