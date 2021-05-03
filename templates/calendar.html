@@ -1,0 +1,86 @@
+<html>
+    <body>
+        <form method="POST" action="{{ url_for('.calendar_sync') }}">
+            <fieldset>
+                {% for team in team_mates %}
+                    <label>
+                        <input type="radio" value="{{ team }}" name="name" />
+                        {{ team }}
+                    </label>
+                {% endfor %}
+            </fieldset>
+
+            <fieldset>
+                <label>
+                    <input type="radio" name="start_modified" value="n" />
+                    지금부터
+                </label>
+
+                <label>
+                    <input type="radio" name="start_modified" value="y" />
+                    특정 시간부터
+                </label>
+            </fieldset>
+
+            <fieldset id="date-picker" style="display: none">
+                <label>
+                    <input type="number" name="start_year" />년
+                </label>
+                <label>
+                    <input type="number" name="start_month" />월
+                </label>
+                <label>
+                    <input type="number" name="start_day" />일
+                </label>
+                <label>
+                    <input type="number" name="start_hour" />시
+                </label>
+                <label>
+                    <input type="number" name="start_min" />분
+                </label>
+                에
+            </fieldset>
+
+            <fieldset>
+                <label>
+                    <input type="number" name="hour" value="9" />시간
+                </label>
+
+                <label>
+                    <input type="number" name="min" value="0" />분
+                </label>
+
+                동안 근무합니다.
+            </fieldset>
+
+            <button type="submit">
+                전송
+            </button>
+        </form>
+
+        <script>
+            const datePicker = document.querySelector('#date-picker');
+            document.querySelectorAll('input[name="start_modified"]').forEach(
+                v => v.addEventListener('change', (e) => {
+                    if (e.currentTarget.value === 'y') {
+                        datePicker.setAttribute('style', 'display: block;');
+                    } else {
+                        datePicker.setAttribute('style', 'display: none;');
+                    }
+                })
+            );
+
+            const today = new Date();
+            [
+                ['start_year', today.getFullYear()],
+                ['start_month', today.getMonth() + 1],
+                ['start_day', today.getDate() + 1],
+                ['start_hour', 10],
+                ['start_min', 0],
+            ].forEach(([n, v]) => {
+                document.querySelector(`input[name="${n}"]`).value = v;
+            });
+
+        </script>
+    </body>
+</html>
